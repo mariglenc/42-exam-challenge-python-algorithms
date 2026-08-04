@@ -1,0 +1,18 @@
+Sliding Window Maximum
+======================
+
+Write a function:
+
+    def sliding_w_m(nums: list[int], k: int) -> list[int]
+
+Slide a window of size k over nums, left to right, and return the maximum of
+each window. If the list is empty or the window is larger than the list,
+return an empty list.
+
+Examples:
+    sliding_w_m([1, 2, 3, 1, 4, 5, 2, 3, 6], 3) -> [3, 3, 4, 5, 5, 5, 6]
+    sliding_w_m([1, 2, 3], 2) -> [2, 3]
+    sliding_w_m([1, 3, 2, 5, 4], 1) -> [1, 3, 2, 5, 4]
+    sliding_w_m([1], 3) -> []
+    sliding_w_m([1, 2], 8) -> []
+    sliding_w_m([], 3) -> []

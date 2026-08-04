@@ -1,0 +1,20 @@
+Spiral Waver
+============
+
+Write a function:
+
+    def spiral_waver(size: int) -> list[list[int]]
+
+Build a size x size matrix filled with the numbers 1 .. size*size laid out
+in a clockwise spiral: start at the top-left corner, go right along the top
+row, then down the right column, then left along the bottom row, then up the
+left column, and keep shrinking inwards until the matrix is full. Return []
+for size <= 0.
+
+Examples:
+    spiral_waver(0) -> []
+    spiral_waver(-1) -> []
+    spiral_waver(1) -> [[1]]
+    spiral_waver(2) -> [[1, 2], [4, 3]]
+    spiral_waver(3) -> [[1, 2, 3], [8, 9, 4], [7, 6, 5]]
+    spiral_waver(4) -> [[1, 2, 3, 4], [12, 13, 14, 5], [11, 16, 15, 6], [10, 9, 8, 7]]

@@ -1,0 +1,15 @@
+Merge Sort Unique
+=================
+
+Write a function:
+
+    def merge_sort_unique(lists: list[list[int]]) -> list[int]
+
+Merge all the inner lists into one, remove duplicates, and return the values
+sorted in ascending order.
+
+Examples:
+    merge_sort_unique([[1, 3, 5], [2, 3, 6], [1, 7]]) -> [1, 2, 3, 5, 6, 7]
+    merge_sort_unique([[2, 2], [2]]) -> [2]
+    merge_sort_unique([[], []]) -> []
+    merge_sort_unique([]) -> []

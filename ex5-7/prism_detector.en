@@ -1,0 +1,29 @@
+Prism Detector
+==============
+
+Write a function:
+
+    def prism_detector(grid: list[str], pattern: str) -> list[tuple[int, int, str]]
+
+Find every occurrence of pattern in a 2D grid of letters (a list of strings)
+searching in all 8 directions. Return a list of (row, col, direction) tuples
+where (row, col) is the position of the pattern's FIRST letter. Return []
+for an empty grid, an empty pattern, or no matches.
+
+Direction codes:
+    "H"   horizontal, left to right        "H-"  horizontal, right to left
+    "V"   vertical, top to bottom          "V-"  vertical, bottom to top
+    "D1"  diagonal, top-left to bottom-right   "D1-" its reverse
+    "D2"  diagonal, top-right to bottom-left   "D2-" its reverse
+
+Scan cells row by row, column by column, and at each cell try the directions
+in the order H, H-, V, V-, D1, D1-, D2, D2- so the result order is
+deterministic.
+
+Examples:
+    prism_detector(["ABC", "DEF", "GHI"], "ADG") -> [(0, 0, 'V')]
+    prism_detector(["XYZ", "ABC", "DEF"], "XBF") -> [(0, 0, 'D1')]
+    prism_detector(["ABC", "DEF", "GHI"], "CBA") -> [(0, 2, 'H-')]
+    prism_detector(["ABC", "DEF", "GHI"], "XYZ") -> []
+    prism_detector([], "ABC") -> []
+    prism_detector(["ABC"], "") -> []

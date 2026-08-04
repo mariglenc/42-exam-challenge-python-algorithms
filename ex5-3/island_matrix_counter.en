@@ -1,0 +1,17 @@
+Island Matrix Counter
+=====================
+
+Write a function:
+
+    def island_matrix_counter(matrix: list[list[str]]) -> int
+
+matrix is a grid of "1" (land) and "0" (water) strings. An island is a group
+of "1" cells connected horizontally or vertically (not diagonally). Return
+the number of islands. An empty matrix has 0 islands.
+
+Examples:
+    island_matrix_counter([["1", "1", "1", "1", "0"], ["1", "1", "1", "0", "0"], ["1", "1", "1", "1", "0"], ["0", "0", "0", "0", "0"]]) -> 1
+    island_matrix_counter([["1", "1", "1", "1", "0"], ["1", "1", "1", "0", "0"], ["0", "1", "0", "1", "0"], ["0", "0", "0", "0", "0"]]) -> 2
+    island_matrix_counter([["0", "0", "0", "1"], ["1", "0", "0", "1"], ["0", "0", "1", "0"]]) -> 3
+    island_matrix_counter([["0"]]) -> 0
+    island_matrix_counter([]) -> 0

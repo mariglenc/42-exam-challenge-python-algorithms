@@ -1,0 +1,17 @@
+Dependency Resolver
+===================
+
+Write a function:
+
+    def resolve_dependencies(deps: dict[str, list[str]]) -> list[str]
+
+deps maps each package name to the list of packages it depends on. Return a
+resolution order in which every package appears BEFORE the packages it
+depends on (a DFS-based reverse topological order; process the packages in
+the dict's key order so the result is deterministic). Raise ValueError if
+the dependencies contain a cycle.
+
+Examples:
+    resolve_dependencies({'app': ['lib1', 'lib2'], 'lib1': ['core'], 'lib2': ['core'], 'core': []}) -> ['app', 'lib2', 'lib1', 'core']
+    resolve_dependencies({'a': ['b'], 'b': ['c'], 'c': []}) -> ['a', 'b', 'c']
+    resolve_dependencies({'a': []}) -> ['a']

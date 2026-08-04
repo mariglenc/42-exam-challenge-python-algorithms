@@ -1,0 +1,20 @@
+Graph Cycle Detector
+====================
+
+Write a function:
+
+    def graph_cycle_detector(graph: dict[int, list[int]]) -> bool
+
+graph maps each node to the list of nodes it points to (a directed graph;
+a node may point to nodes that have no key of their own). Return True if
+the graph contains a cycle, False otherwise. Use DFS with a "currently in
+the recursion path" set: seeing a node that is already on the current path
+means a cycle. An empty graph has no cycle.
+
+Examples:
+    graph_cycle_detector({0: [1], 1: [2], 2: [0]}) -> True
+    graph_cycle_detector({0: [1], 1: [2], 2: []}) -> False
+    graph_cycle_detector({0: [0]}) -> True
+    graph_cycle_detector({0: [1], 1: [], 2: [3], 3: [2]}) -> True
+    graph_cycle_detector({0: [1, 2], 1: [3], 2: [3], 3: []}) -> False
+    graph_cycle_detector({}) -> False

@@ -1,0 +1,19 @@
+Word Ladder Builder
+===================
+
+Write a function:
+
+    def word_ladder_builder(start: str, end: str, wordlist: list[str]) -> int
+
+Transform start into end one letter at a time; every intermediate word must
+be in wordlist (start itself does not have to be). All words have the same
+length. Return the length of the SHORTEST ladder counted in words including
+both start and end (BFS level count), or 0 if end is not in wordlist or no
+ladder exists.
+
+Examples:
+    word_ladder_builder("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]) -> 5
+    word_ladder_builder("hit", "cog", ["hot", "dot", "dog", "lot", "log"]) -> 0
+    word_ladder_builder("hit", "hot", ["hot"]) -> 2
+    word_ladder_builder("hit", "hit", ["hit"]) -> 1
+    word_ladder_builder("abc", "xyz", ["xbc", "xyc", "xyz"]) -> 4

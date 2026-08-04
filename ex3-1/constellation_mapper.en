@@ -1,0 +1,17 @@
+Constellation Mapper
+====================
+
+Write a function:
+
+    def constellation_mapper(stars: list[tuple[int, int]], size: int) -> list[str]
+
+Build a size x size grid of '.' characters and mark every star with '*'.
+Each star is a (row, col) tuple; stars outside the grid are ignored.
+Return the grid as a list of strings, one string per row.
+
+Examples:
+    constellation_mapper([(0, 0), (1, 1), (2, 2)], 3) -> ['*..', '.*.', '..*']
+    constellation_mapper([(1, 1), (0, 1), (2, 1), (1, 0), (1, 2)], 3) -> ['.*.', '***', '.*.']
+    constellation_mapper([], 2) -> ['..', '..']
+    constellation_mapper([(0, 0), (5, 5)], 3) -> ['*..', '...', '...']
+    constellation_mapper([(0, 1), (1, 1), (2, 1)], 3) -> ['.*.', '.*.', '.*.']

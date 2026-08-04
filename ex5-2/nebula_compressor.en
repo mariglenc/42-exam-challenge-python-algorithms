@@ -1,0 +1,27 @@
+Nebula Compressor
+=================
+
+Write a function:
+
+    def nebula_compressor(operation: str, data: str) -> str
+
+A simple run-length codec. operation is either "compress" or "decompress";
+any other operation returns "Error". Empty data returns "".
+
+compress: replace every run of the same character with the character
+followed by the run length. A run of length 1 is written as just the
+character (no "1"). Run lengths are single digits: a run longer than 9 is
+split into chunks of 9 (e.g. 12 a's -> "a9a3").
+
+decompress: the reverse — a character followed by a digit expands to that
+character repeated digit times; a character not followed by a digit stands
+for itself.
+
+Examples:
+    nebula_compressor("compress", "aaabbc") -> "a3b2c"
+    nebula_compressor("compress", "abc") -> "abc"
+    nebula_compressor("compress", "aaaaaaaaaaaa") -> "a9a3"
+    nebula_compressor("compress", "") -> ""
+    nebula_compressor("decompress", "a3b2c") -> "aaabbc"
+    nebula_compressor("decompress", "hel2o") -> "hello"
+    nebula_compressor("explode", "abc") -> "Error"
