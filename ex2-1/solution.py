@@ -1,11 +1,32 @@
+def spiral_waver(size: int) -> list[list[int]]:
+    if size <= 0:
+        return []
 
-def list_intersection(lists: list[list[int]]) -> list[int]:
-    if not lists:              # if the outer list is empty
-        return lists           # return [] (lists is already the empty list)
+    matrix = [[0] * size for _ in range(size)]
+    top, bottom, left, right = 0, size - 1, 0, size - 1
+    num = 1
 
-    common = set(lists[0])     # We start with the first list so the loop has something to intersect against
+    while num <= size * size:
+        for col in range(left, right + 1):          # left -> right along the top
+            matrix[top][col] = num
+            num += 1
+        top += 1
 
-    for lst in lists[1:]:      # go through the REST of the inner lists (skip the first)
-        common &= set(lst)     # keep only numbers that are in BOTH common AND this list
+        for row in range(top, bottom + 1):          # top -> bottom along the right
+            matrix[row][right] = num
+            num += 1
+        right -= 1
 
-    return sorted(common)      # sort the survivors ascending, return as a list
+        if top <= bottom:                           # right -> left along the bottom
+            for col in range(right, left - 1, -1):
+                matrix[bottom][col] = num
+                num += 1
+            bottom -= 1
+
+        if left <= right:                           # bottom -> top along the left
+            for row in range(bottom, top - 1, -1):
+                matrix[row][left] = num
+                num += 1
+            left += 1
+
+    return matrix

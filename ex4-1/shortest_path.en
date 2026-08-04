@@ -1,0 +1,20 @@
+shortest path
+==================
+
+Write a function:
+
+    def shortest_path(grid: list[list[int]]) -> int
+
+The grid holds 0 (free) and 1 (wall). Starting at the top-left cell and
+moving only up/down/left/right through free cells, return the minimum
+number of moves needed to reach the bottom-right cell. Return -1 when the
+grid is empty, the start or goal is a wall, or no path exists. A 1x1 free
+grid needs 0 moves.
+
+Examples:
+    shortest_path([[0]]) -> 0
+    shortest_path([[0, 0, 0], [1, 1, 0], [0, 0, 0]]) -> 4
+    shortest_path([[0, 0, 0], [1, 1, 0], [0, 0, 0], [0, 0, 0], [1, 0, 0]]) -> 6
+    shortest_path([[0, 1], [1, 0]]) -> -1
+    shortest_path([[1, 0], [0, 0]]) -> -1
+    shortest_path([]) -> -1

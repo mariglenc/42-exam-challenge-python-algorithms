@@ -1,0 +1,27 @@
+prism detector
+==================
+
+Write a function:
+
+    def prism_detector(grid: list[str], pattern: str) -> list[tuple[int, int, str]]
+
+Find every occurrence of `pattern` in a rectangular character grid, looking
+in all 8 directions. Report each match as a tuple
+(start_row, start_col, direction_code), where the start cell holds the
+FIRST character of the pattern. Scan rows top to bottom, each row left to
+right, and test the directions in the order listed below, so the result
+order is deterministic. An empty grid or an empty pattern gives [].
+
+Direction codes (row step, column step):
+    "H"   ( 0,  1)  left to right       "H-"  ( 0, -1)  right to left
+    "V"   ( 1,  0)  top to bottom       "V-"  (-1,  0)  bottom to top
+    "D1"  ( 1,  1)  down-right          "D1-" (-1, -1)  up-left
+    "D2"  ( 1, -1)  down-left           "D2-" (-1,  1)  up-right
+
+Examples:
+    prism_detector(["ABC", "DEF", "GHI"], "ADG") -> [(0, 0, 'V')]
+    prism_detector(["XYZ", "ABC", "DEF"], "XBF") -> [(0, 0, 'D1')]
+    prism_detector(["AB", "BA"], "AB") -> [(0, 0, 'H'), (0, 0, 'V'), (1, 1, 'H-'), (1, 1, 'V-')]
+    prism_detector(["HELLO", "WORLD"], "LL") -> [(0, 2, 'H'), (0, 2, 'D1'), (0, 3, 'H-'), (0, 3, 'V'), (1, 3, 'V-'), (1, 3, 'D1-')]
+    prism_detector([], "ABC") -> []
+    prism_detector(["ABC"], "") -> []

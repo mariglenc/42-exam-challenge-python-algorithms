@@ -1,0 +1,20 @@
+assign meeting rooms
+==================
+
+Write a function:
+
+    def assign_meeting_rooms(meetings: list[list[int]]) -> tuple[int, dict]
+
+Each meeting is [start, end]. Assign every meeting to a room so that no
+two meetings in the same room overlap; a meeting may start exactly when
+the previous one ends. Use this greedy procedure so the assignment is
+deterministic: sort the meetings, then place each one in the LOWEST-
+numbered room that is free at its start time, creating a new room when
+none is. Return (rooms_needed, room_assignments) where room_assignments
+maps each room number to the list of meetings it received, in order.
+
+Examples:
+    assign_meeting_rooms([[9, 10], [9, 12], [11, 13]]) -> (2, {0: [[9, 10], [11, 13]], 1: [[9, 12]]})
+    assign_meeting_rooms([[8, 9], [9, 10], [10, 11]]) -> (1, {0: [[8, 9], [9, 10], [10, 11]]})
+    assign_meeting_rooms([[10, 20], [15, 25], [20, 30], [5, 10]]) -> (2, {0: [[5, 10], [10, 20], [20, 30]], 1: [[15, 25]]})
+    assign_meeting_rooms([]) -> (0, {})

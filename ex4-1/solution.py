@@ -1,24 +1,32 @@
-def palindrome_cut(word: str) -> int:
-    s = word.lower().replace(" ", "")
-    length = len(s)
+from collections import deque
 
-    if length <= 1:
-        return 0
 
-    # dp[i] = min cuts for s[:i+1]; expand around every palindrome centre
-    dp = [i for i in range(length)]
+def shortest_path(grid: list[list[int]]) -> int:
+    if not grid:
+        return -1
 
-    def expand(left, right):
-        while left >= 0 and right < length and s[left] == s[right]:
-            if left == 0:
-                dp[right] = 0
-            else:
-                dp[right] = min(dp[right], dp[left - 1] + 1)
-            left -= 1
-            right += 1
+    rows, cols = len(grid), len(grid[0])
+    if grid[0][0] == 1 or grid[rows - 1][cols - 1] == 1:
+        return -1
 
-    for i in range(length):
-        expand(i, i)
-        expand(i, i + 1)
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    queue = deque([(0, 0, 0)])      # row, col, distance in moves
+    visited = {(0, 0)}
 
-    return dp[length - 1]
+    while queue:
+        row, col, distance = queue.popleft()
+        if row == rows - 1 and col == cols - 1:
+            return distance
+
+        for dr, dc in directions:
+            new_row, new_col = row + dr, col + dc
+            if not (0 <= new_row < rows and 0 <= new_col < cols):
+                continue
+            if grid[new_row][new_col] == 1:
+                continue
+            if (new_row, new_col) in visited:
+                continue
+            visited.add((new_row, new_col))
+            queue.append((new_row, new_col, distance + 1))
+
+    return -1

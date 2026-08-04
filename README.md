@@ -103,22 +103,14 @@ level.
 
 | id    | function                | topic |
 |-------|-------------------------|-------|
-| ex1-1 | `sort_list_of_lists`    | sorting |
-| ex1-2 | `merge_sort_unique`     | merge + dedupe |
-| ex2-1 | `list_intersection`     | set logic |
-| ex2-2 | `sliding_w_m`           | sliding window |
-| ex2-3 | `nebula_compressor`     | run-length encoding |
-| ex3-1 | `constellation_mapper`  | grouping |
-| ex3-2 | `arr_rotation_detector` | array rotation |
-| ex3-3 | `spiral_waver`          | matrix spiral fill |
-| ex3-4 | `prism_detector`        | 8-direction grid search |
-| ex4-1 | `palindrome_cut`        | strings |
-| ex4-2 | `resolve_dependencies`  | topological sort |
-| ex4-3 | `island_matrix_counter` | grid DFS |
-| ex4-4 | `graph_cycle_detector`  | graph DFS cycle check |
-| ex5-1 | `shortest_path`         | grid BFS |
-| ex5-2 | `word_ladder_builder`   | word BFS |
-| ex5-3 | `assign_meeting_rooms`  | interval scheduling |
+| ex1-1 | `nebula_compressor`     | run-length encoding |
+| ex2-1 | `spiral_waver`          | matrix spiral fill |
+| ex2-2 | `prism_detector`        | 8-direction grid search |
+| ex3-1 | `island_matrix_counter` | grid DFS |
+| ex3-2 | `graph_cycle_detector`  | graph DFS cycle check |
+| ex4-1 | `shortest_path`         | grid BFS |
+| ex4-2 | `word_ladder_builder`   | word BFS |
+| ex5-1 | `assign_meeting_rooms`  | interval scheduling |
 
 ## Layout
 

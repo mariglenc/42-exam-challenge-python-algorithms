@@ -1,29 +1,23 @@
-# def constellation_mapper(stars: list[tuple[int, int]], size: int) -> list[str]:
-#     s = set(stars)
-#     return ["".join('*' if (r, c) in s else '.' for c in range(size)) for r in range(size)]
+def island_matrix_counter(matrix: list[list[str]]) -> int:
+    if not matrix or not matrix[0]:
+        return 0
 
-def constellation_mapper(stars: list[tuple[int, int]], size: int) -> list[str]:
-    # 1. Build an empty grid: a list of rows, each row a list of '.'
-    grid = []
-    for r in range(size):          # for each row 0..size-1
-        row = []
-        for c in range(size):      # for each column 0..size-1
-            row.append('.')        # start every cell as a dot
-        grid.append(row)
+    rows, cols = len(matrix), len(matrix[0])
+    islands = 0
 
-    # 2. Place the stars
-    for (r, c) in stars:                       # each star is a (row, col) tuple
-        if 0 <= r < size and 0 <= c < size:    # only if it's inside the grid
-            grid[r][c] = '*'                    # mark that cell with a star
+    def dfs(r: int, c: int) -> None:
+        if r < 0 or r >= rows or c < 0 or c >= cols or matrix[r][c] != "1":
+            return
+        matrix[r][c] = "0"      # sink the cell so it is never counted twice
+        dfs(r + 1, c)
+        dfs(r - 1, c)
+        dfs(r, c + 1)
+        dfs(r, c - 1)
 
-    # 3. Turn each row (a list of chars) into a single string
-    result = []
-    for row in grid:
-        result.append("".join(row))   # ['.', '*', '.'] -> ".*."
-    return result
+    for r in range(rows):
+        for c in range(cols):
+            if matrix[r][c] == "1":
+                islands += 1
+                dfs(r, c)
 
-# print(constellation_mapper([(0, 0), (1, 1), (2, 2)], 3)) # ['*..', '.*.', '..*']
-# print(constellation_mapper([(1, 1), (0, 1), (2, 1), (1, 0), (1, 2)], 3)) # ['.*.', '***', '.*.']
-# print(constellation_mapper([], 2)) # ['..', '..']
-# print(constellation_mapper([(0, 0), (5, 5)], 3)) # ['*..', '...', '...']
-# print(constellation_mapper([(0, 1), (1, 1), (2, 1)], 3)) # ['.*.', '.*.', '.*.']
+    return islands

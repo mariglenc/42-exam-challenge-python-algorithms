@@ -1,15 +1,12 @@
-from collections import deque
-
-
 def word_ladder_builder(start: str, end: str, wordlist: list[str]) -> int:
     if end not in wordlist:
         return 0
 
-    queue = deque([(start, 1)])     # word, ladder length so far
+    queue = [(start, 1)]
     visited = {start}
 
     while queue:
-        word, steps = queue.popleft()
+        word, steps = queue.pop(0)
         if word == end:
             return steps
 
