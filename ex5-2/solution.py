@@ -1,48 +1,35 @@
-def nebula_compressor(operation: str, data: str) -> str:
-    if operation not in ("compress", "decompress"):
-        return "Error"
+from collections import deque
 
-    if not data:
-        return ""
 
-    if operation == "compress":
-        result = []
-        current = data[0]
-        count = 1
+def word_ladder_builder(start: str, end: str, wordlist: list[str]) -> int:
+    if end not in wordlist:
+        return 0
 
-        def flush(ch, n):
-            while n > 9:
-                result.append(f"{ch}9")
-                n -= 9
-            result.append(ch if n == 1 else f"{ch}{n}")
+    queue = deque([(start, 1)])
+    visited = {start}
 
-        for ch in data[1:]:
-            if ch == current:
-                count += 1
-            else:
-                flush(current, count)
-                current = ch
-                count = 1
+    while queue:
+        word, steps = queue.popleft()
 
-        flush(current, count)
-        return "".join(result)
+        if word == end:
+            return steps
 
-    # decompress
-    result = []
-    i = 0
-    while i < len(data):
-        ch = data[i]
-        if i + 1 < len(data) and data[i + 1].isdigit():
-            result.append(ch * int(data[i + 1]))
-            i += 2
-        else:
-            result.append(ch)
-            i += 1
+        for candidate in wordlist:
+            if candidate in visited or len(candidate) != len(word):
+                continue
 
-    return "".join(result)
+            diff = 0
+            for i in range(len(word)):
+                if word[i] != candidate[i]:
+                    diff += 1
+
+            if diff == 1:
+                queue.append((candidate, steps + 1))
+                visited.add(candidate)
+
+    return 0
 
 
 if __name__ == "__main__":
-    print(nebula_compressor("compress", "aaabbc"))     # a3b2c
-    print(nebula_compressor("decompress", "hel2o"))    # hello
-    print(nebula_compressor("explode", "abc"))         # Error
+    print(word_ladder_builder("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]))  # 5
+    print(word_ladder_builder("hit", "cog", ["hot", "dot", "dog", "lot", "log"]))         # 0

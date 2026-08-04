@@ -1,44 +1,56 @@
-def spiral_waver(size: int) -> list[list[int]]:
-    if size <= 0:
-        return []
+from collections import deque
 
-    matrix = [[0] * size for _ in range(size)]
 
-    top, bottom = 0, size - 1
-    left, right = 0, size - 1
-    num = 1
+def shortest_path(grid: list[list[int]]) -> int:
+    if not grid:
+        return -1
 
-    while num <= size * size:
-        # left -> right along the top row
-        for col in range(left, right + 1):
-            matrix[top][col] = num
-            num += 1
-        top += 1
+    rows = len(grid)
+    cols = len(grid[0])
 
-        # top -> bottom along the right column
-        for row in range(top, bottom + 1):
-            matrix[row][right] = num
-            num += 1
-        right -= 1
+    if grid[0][0] == 1 or grid[rows - 1][cols - 1] == 1:
+        return -1
 
-        # right -> left along the bottom row
-        if top <= bottom:
-            for col in range(right, left - 1, -1):
-                matrix[bottom][col] = num
-                num += 1
-            bottom -= 1
+    directions = [
+        (-1, 0),   # up
+        (1, 0),    # down
+        (0, -1),   # left
+        (0, 1),    # right
+    ]
 
-        # bottom -> top along the left column
-        if left <= right:
-            for row in range(bottom, top - 1, -1):
-                matrix[row][left] = num
-                num += 1
-            left += 1
+    queue = deque([(0, 0, 0)])   # row, col, distance
+    visited = {(0, 0)}
 
-    return matrix
+    while queue:
+        row, col, distance = queue.popleft()
+
+        if row == rows - 1 and col == cols - 1:
+            return distance
+
+        for dr, dc in directions:
+            new_row = row + dr
+            new_col = col + dc
+
+            if not (0 <= new_row < rows and 0 <= new_col < cols):
+                continue
+            if grid[new_row][new_col] == 1:
+                continue
+            if (new_row, new_col) in visited:
+                continue
+
+            visited.add((new_row, new_col))
+            queue.append((new_row, new_col, distance + 1))
+
+    return -1
 
 
 if __name__ == "__main__":
-    print(spiral_waver(1))   # [[1]]
-    print(spiral_waver(3))   # [[1, 2, 3], [8, 9, 4], [7, 6, 5]]
-    print(spiral_waver(4))   # [[1, 2, 3, 4], [12, 13, 14, 5], [11, 16, 15, 6], [10, 9, 8, 7]]
+    print(shortest_path([
+        [0, 0, 0],
+        [1, 1, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+        [1, 0, 0],
+    ]))  # 6
+    print(shortest_path([[0]]))            # 0
+    print(shortest_path([[0, 1], [1, 0]]))  # -1

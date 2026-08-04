@@ -1,43 +1,28 @@
-def island_matrix_counter(matrix: list[list[str]]) -> int:
-    if not matrix:
-        return 0
+def assign_meeting_rooms(meetings: list[list[int]]) -> tuple[int, dict]:
+    if not meetings:
+        return 0, {}
 
-    islands = 0
+    rooms = {}
 
-    def dfs(r, c):
-        if (
-            r < 0 or c < 0 or
-            r >= len(matrix) or
-            c >= len(matrix[0]) or
-            matrix[r][c] == "0"     # water
-        ):
-            return
+    for meeting in sorted(meetings):
+        start = meeting[0]
+        placed = False
 
-        matrix[r][c] = "0"          # sink the cell so it is not counted twice
+        # first-fit: the lowest-numbered room whose last meeting has ended
+        for schedule in rooms.values():
+            if start >= schedule[-1][1]:
+                schedule.append(meeting)
+                placed = True
+                break
 
-        dfs(r + 1, c)
-        dfs(r - 1, c)
-        dfs(r, c + 1)
-        dfs(r, c - 1)
+        if not placed:
+            rooms[len(rooms)] = [meeting]
 
-    for r in range(len(matrix)):
-        for c in range(len(matrix[0])):
-            if matrix[r][c] == "1":
-                islands += 1
-                dfs(r, c)
-
-    return islands
+    return len(rooms), rooms
 
 
 if __name__ == "__main__":
-    print(island_matrix_counter([
-        ["1", "1", "1", "1", "0"],
-        ["1", "1", "1", "0", "0"],
-        ["1", "1", "1", "1", "0"],
-        ["0", "0", "0", "0", "0"],
-    ]))  # 1
-    print(island_matrix_counter([
-        ["0", "0", "0", "1"],
-        ["1", "0", "0", "1"],
-        ["0", "0", "1", "0"],
-    ]))  # 3
+    print(assign_meeting_rooms([[9, 10], [9, 12], [11, 13]]))
+    # (2, {0: [[9, 10], [11, 13]], 1: [[9, 12]]})
+    print(assign_meeting_rooms([[10, 20], [15, 25], [20, 30], [5, 10]]))
+    # (2, {0: [[5, 10], [10, 20], [20, 30]], 1: [[15, 25]]})

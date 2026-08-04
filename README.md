@@ -98,8 +98,8 @@ so you can retake the same exam.
 Each exercise lives in its own `ex<level>-<n>/` folder holding the `.en`
 question and a `solution.py` reference (shown only via the `solution`
 command). Your attempts accumulate there as `try<N>.py`, created by
-`ask`/`exam`. Five levels: levels 1–4 have two exercises each, level 5 is
-the challenge level with eight.
+`ask`/`exam`. Five levels, easiest to hardest; level 5 is the challenge
+level.
 
 | id    | function                | topic |
 |-------|-------------------------|-------|
@@ -107,18 +107,18 @@ the challenge level with eight.
 | ex1-2 | `merge_sort_unique`     | merge + dedupe |
 | ex2-1 | `list_intersection`     | set logic |
 | ex2-2 | `sliding_w_m`           | sliding window |
+| ex2-3 | `nebula_compressor`     | run-length encoding |
 | ex3-1 | `constellation_mapper`  | grouping |
 | ex3-2 | `arr_rotation_detector` | array rotation |
+| ex3-3 | `spiral_waver`          | matrix spiral fill |
+| ex3-4 | `prism_detector`        | 8-direction grid search |
 | ex4-1 | `palindrome_cut`        | strings |
 | ex4-2 | `resolve_dependencies`  | topological sort |
-| ex5-1 | `spiral_waver`          | matrix spiral fill |
-| ex5-2 | `nebula_compressor`     | run-length encoding |
-| ex5-3 | `island_matrix_counter` | grid DFS |
-| ex5-4 | `shortest_path`         | grid BFS |
-| ex5-5 | `graph_cycle_detector`  | graph DFS cycle check |
-| ex5-6 | `word_ladder_builder`   | word BFS |
-| ex5-7 | `prism_detector`        | 8-direction grid search |
-| ex5-8 | `assign_meeting_rooms`  | interval scheduling |
+| ex4-3 | `island_matrix_counter` | grid DFS |
+| ex4-4 | `graph_cycle_detector`  | graph DFS cycle check |
+| ex5-1 | `shortest_path`         | grid BFS |
+| ex5-2 | `word_ladder_builder`   | word BFS |
+| ex5-3 | `assign_meeting_rooms`  | interval scheduling |
 
 ## Layout
 
