@@ -1,41 +1,66 @@
 def nebula_compressor(operation: str, data: str) -> str:
-    if operation not in ("compress", "decompress"):
-        return "Error"
+    if operation == "compress":
+        return compress(data)
+    if operation == "decompress":
+        return decompress(data)
+    return "Error"
 
-    if not data:
+
+def compress(text: str) -> str:
+    if not text:
         return ""
 
-    if operation == "compress":
-        result = []
-        current = data[0]
-        count = 1
+    pieces = []
+    run_char = text[0]   # the character we're currently counting
+    run_length = 1       # how many times we've seen it in a row
 
-        def flush(ch: str, n: int) -> None:
-            # runs longer than 9 are split so decompress stays single-digit
-            while n > 9:
-                result.append(f"{ch}9")
-                n -= 9
-            result.append(ch if n == 1 else f"{ch}{n}")
-
-        for ch in data[1:]:
-            if ch == current:
-                count += 1
-            else:
-                flush(current, count)
-                current = ch
-                count = 1
-        flush(current, count)
-        return "".join(result)
-
-    # decompress
-    result = []
-    i = 0
-    while i < len(data):
-        ch = data[i]
-        if i + 1 < len(data) and data[i + 1].isdigit():
-            result.append(ch * int(data[i + 1]))
-            i += 2
+    for char in text[1:]:
+        if char == run_char:
+            run_length += 1
         else:
-            result.append(ch)
-            i += 1
-    return "".join(result)
+            pieces.append(encode_run(run_char, run_length))
+            run_char = char
+            run_length = 1
+
+    pieces.append(encode_run(run_char, run_length))  # don't forget the last run
+    return "".join(pieces)
+
+
+def encode_run(char: str, length: int) -> str:
+    """Turn one run into text: 'a',1 -> 'a'   'a',4 -> 'a4'   'a',12 -> 'a9a3'"""
+    encoded = ""
+    while length > 9:            # split long runs into chunks of 9
+        encoded += char + "9"
+        length -= 9
+    if length == 1:
+        encoded += char          # single characters stay plain
+    else:
+        encoded += char + str(length)
+    return encoded
+
+
+def decompress(text: str) -> str:
+    pieces = []
+    position = 0
+
+    while position < len(text):
+        char = text[position]
+        next_is_digit = position + 1 < len(text) and text[position + 1].isdigit()
+
+        if next_is_digit:
+            count = int(text[position + 1])
+            pieces.append(char * count)
+            position += 2        # we consumed the char AND the digit
+        else:
+            pieces.append(char)
+            position += 1
+
+    return "".join(pieces)
+
+print(nebula_compressor("compress", "aaabbbcccc")) # "a3b3c4"
+print(nebula_compressor("compress", "abc")) # "abc"
+print(nebula_compressor("compress", "aaaaaaaaaaaa")) # "a9a3"
+print(nebula_compressor("compress", "")) # ""
+print(nebula_compressor("decompress", "a3b3c4")) # "aaabbbcccc"
+print(nebula_compressor("decompress", "x")) # "x"
+print(nebula_compressor("explode", "abc")) # "Error"
