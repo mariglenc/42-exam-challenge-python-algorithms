@@ -24,29 +24,21 @@ def spiral_waver(size: int) -> list[list[int]]:
             num += 1
         top_row += 1
 
-        for row in (top_row, bottom_row + 1):
-            matrix[right_col][row] = num
+        for row in range(top_row, bottom_row + 1):
+            matrix[row][right_col] = num
             num += 1
-        left_col -= 1
-        
+        right_col -= 1
+
         if top_row <= bottom_row:
-            for col in range(left_col, right_col - 1, -1):
+            for col in range(right_col, left_col - 1, -1):
                 matrix[bottom_row][col] = num
                 num += 1
             bottom_row -= 1
-        
+
         if left_col <= right_col:
             for row in range(bottom_row, top_row - 1, -1):
-                matrix[left_col][row] = num
+                matrix[row][left_col] = num
                 num += 1
             left_col += 1
 
-    print(matrix)
     return matrix
-
-    
-    
-    
-    
-
-spiral_waver(3)
